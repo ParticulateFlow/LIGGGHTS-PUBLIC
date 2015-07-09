@@ -294,6 +294,7 @@ namespace FixConst {
   static const int POST_RUN =                1<<19;
   static const int ITERATE_IMPLICITLY =      1<<20; 
   static const int FIX_CONST_LAST =          1<<21; 
+  static const int PARALLEL_OPENMP =         1<<31;
 }
 
 }

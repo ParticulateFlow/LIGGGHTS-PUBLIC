@@ -276,8 +276,15 @@ void Verlet::run(int n)
       timer->stamp();
       
       comm->exchange();
-      
-      if (sortflag && ntimestep >= atom->nextsort) atom->sort();
+
+      // periodically sort particle data
+      // if atoms have moved, we need to enforce sorting to update partitions
+      if (sortflag && (atom->dirty || ntimestep >= atom->nextsort)) {
+        // don't count sorting as part of Comm time -> this will become part of Other
+        timer->stamp(TIME_COMM);
+        atom->sort();
+        timer->stamp();
+      }
       comm->borders();
       if (triclinic) domain->lamda2x(atom->nlocal+atom->nghost);
       timer->stamp(TIME_COMM);

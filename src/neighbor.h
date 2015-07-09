@@ -33,6 +33,7 @@ class Neighbor : protected Pointers {
   friend class Cuda;
   
   friend class FixNeighlistMesh;
+  friend class FixNeighlistMeshOMP;
   friend class OneLevelGrid;
   
   friend class FixHeatGranRad;
